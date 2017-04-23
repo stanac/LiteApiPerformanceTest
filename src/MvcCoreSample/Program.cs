@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace BenchmarkLiteApiSample
+namespace MvcCoreSample
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                //.UseIISIntegration()
+                .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseKestrel()
+                .UseUrls("http://localhost:5555")
                 .Build();
 
             host.Run();
+
+            return 0;
         }
     }
 }
